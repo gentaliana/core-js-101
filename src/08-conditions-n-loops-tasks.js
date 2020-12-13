@@ -191,8 +191,12 @@ function findFirstSingleChar(/* str */) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  const firstBracket = isStartIncluded ? '[' : '(';
+  const secondBracket = isEndIncluded ? ']' : ')';
+  const firstNumber = a > b ? b : a;
+  const secondNumber = a > b ? a : b;
+  return `${firstBracket}${firstNumber}, ${secondNumber}${secondBracket}`;
 }
 
 /**
@@ -223,8 +227,8 @@ function reverseString(str) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  return Number(String(num).split('').reverse().join(''));
 }
 
 /**
@@ -247,8 +251,21 @@ function reverseInteger(/* num */) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  let summ = 0;
+  const result = String(ccn);
+  const lenghtCnn = result.length;
+  for (let i = 0; i < lenghtCnn; i += 1) {
+    let numCard = parseInt(result[i], 10);
+    if ((lenghtCnn - i) % 2 === 0) {
+      numCard *= 2;
+      if (numCard > 9) {
+        numCard -= 9;
+      }
+    }
+    summ += numCard;
+  }
+  return summ % 10 === 0;
 }
 
 /**
